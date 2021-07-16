@@ -5,5 +5,5 @@ CREATE TABLE pair (
   emp1 INT NULL,
   emp2 INT  NULL,
   projectID INT NOT NULL,
-  totalDaysWorkedTogether DATE NOT NULL
+  TOTAL_DAYS_WORKED_TOGETHER INT NOT NULL
 );

@@ -51,7 +51,6 @@ public class MainController {
     public ModelAndView showResults(Model model) throws IOException {
         ModelAndView modelAndView = new ModelAndView("result");
         //We read file from resource folder
-        //readFileFromSource.readFile();
         List<Employee> t = readFileFromSource.readFile();
         List<WorkTogether> list = readFileFromSource.calculatePair(t);
 

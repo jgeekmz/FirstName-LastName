@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 public class Pair {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int emp1;
     private int emp2;

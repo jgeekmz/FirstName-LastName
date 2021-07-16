@@ -12,8 +12,9 @@ import java.awt.*;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -141,11 +142,12 @@ public class ReadFileFromSource {
 //                "MM-dd-yyyy", "MM/dd/yyyy", "MM.dd.yyyy",
 //                "MMM-dd-yyyy", "MMM/dd/yyyy", "MMM.dd.yyyy",
 //                "MMMM-dd-yyyy", "MMMM/dd/yyyy", "MMMM.dd.yyyy"
-        String tempDate = dateToGuess; //.replace("/", "").replace("-", "").replace(" ", "");
+        //        .replace("/", "").replace("-", "").replace(" ", "");
+        String tempDate = dateToGuess;
         String dateFormat = "";
 
-        if (tempDate.matches("([0-12]{2})([0-31]{2})([0-9]{4})") || tempDate.matches("([0-12]{2})([0-31]{2})([0-9]{4})") || tempDate.matches("([0-12]{2})([0-31]{2})([0-9]{4})")) {
-            dateFormat = "MMddyyyy";
+        if (tempDate.matches("^[0-3]?[0-9]/[0-3]?[0-9]/(?:[0-9]{2})?[0-9]{2}$")) {
+            dateFormat = "MM/dd/yyyy";
         } else if (tempDate.matches("([0-31]{2})/([0-12]{2})/([0-9]{4})")) {
             dateFormat = "dd/MM/yyyy";
         } else if (tempDate.matches("([0-31]{2})-([0-12]{2})-([0-9]{4})")) {
@@ -182,8 +184,8 @@ public class ReadFileFromSource {
     public static String determineDateFormatPattern(String dateToGuess) {
         String tempDate = dateToGuess; //.replace("/", "").replace("-", "").replace(" ", "");
         String dateFormat = "";
-        if (tempDate.matches("([0-12]{2})([0-31]{2})([0-9]{4})") || tempDate.matches("([0-12]{2})([0-31]{2})([0-9]{4})") || tempDate.matches("([0-12]{2})([0-31]{2})([0-9]{4})")) {
-            dateFormat = "MMddyyyy";
+        if (tempDate.matches("^[0-3]?[0-9]/[0-3]?[0-9]/(?:[0-9]{2})?[0-9]{2}$")) {
+            dateFormat = "MM/dd/yyyy";
         } else if (tempDate.matches("([0-31]{2})/([0-12]{2})/([0-9]{4})")) {
             dateFormat = "dd/MM/yyyy";
         } else if (tempDate.matches("([0-31]{2})-([0-12]{2})-([0-9]{4})")) {
@@ -223,14 +225,24 @@ public class ReadFileFromSource {
             daysSpentOnSameProject = calculateDifference(s2, e2);
         }
 
-        long diff = TimeUnit.DAYS.convert(daysSpentOnSameProject, TimeUnit.MILLISECONDS);
-        daysSpentOnSameProject = Math.abs(diff);
-        return daysSpentOnSameProject;
+        long diff = daysSpentOnSameProject;
+        long l = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+        l = Math.abs(diff);
+        return l;
     }
 
     private long calculateDifference(Date start, Date end) {
-        return end.getTime() - start.getTime();
+        Period period = Period.between(convertTolocalDate(start), convertTolocalDate(end));
+        long result = ChronoUnit.DAYS.between(convertTolocalDate(start), convertTolocalDate(end));
+        return result;
     }
+
+    private LocalDate convertTolocalDate(Date date) {
+        return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+
+
 
 
 }
