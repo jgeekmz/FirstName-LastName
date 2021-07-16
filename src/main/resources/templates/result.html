@@ -1,0 +1,33 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<p>File was uploaded!</p>
+
+<div class="col-lg-12">
+    <section class="panel">
+        <header class="panel-heading">Employee Worked Together on same projects</header>
+        <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>
+        <table class="table table-striped table-advance table-hover">
+            <tbody>
+            <tr>
+                <th><i class="icon_table"></i> Employee ID#1</th>
+                <th><i class="icon_table"></i> Employee ID#1</th>
+                <th><i class="icon_table"></i> Project ID</th>
+                <th><i class="icon_table"></i> Days Worked</th>
+                <th><i class="icon_cogs"></i> Action</th>
+            </tr>
+            <tr th:each="pair:${pairs}">
+                <td th:text="${pair.emp1}">Employee ID#1</td>
+                <td th:text="${pair.emp2}">Employee ID#1</td>
+                <td th:text="${pair.projectID}">Project ID</td>
+                <td th:text="${pair.daysWorkedTotal}">Days Worked</td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+
+</body>
+</html>

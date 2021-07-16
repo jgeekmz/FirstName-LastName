@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS pair;
+
+CREATE TABLE pair (
+  id INT AUTO_INCREMENT  PRIMARY KEY,
+  emp1 INT NULL,
+  emp2 INT  NULL,
+  projectID INT NOT NULL,
+  totalDaysWorkedTogether DATE NOT NULL
+);
