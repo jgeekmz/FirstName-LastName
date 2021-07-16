@@ -13,7 +13,7 @@ a. Java - (http://www.oracle.com/technetwork/java/codeconvtoc-136057.html )
 b. C# - (https://docs.microsoft.com/en-us/dotnet/csharp/programmingguide/inside-a-program/coding-conventions ) 
 c. Други виж тук (https://en.wikipedia.org/wiki/Coding_conventions )
 Решение на задачата да бъде сложено в github
-a. Repository Name да бъде „FirstName-LastName-employees (т.е. ivan-ivanovemployess)
+a. Repository Name да бъде „FirstName-LastName-employees
 
 Да бъде направена в рамките на един ден. Бонус условия
 Да се направи UI, където потребителя да може да избере файл от файловата система и след избирането на файла да види резултата в “datagrid” със следните колони Employee ID #1, Employee ID #2, Project IDs, Days worked
