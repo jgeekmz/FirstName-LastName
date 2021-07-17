@@ -27,7 +27,6 @@ public class ReadFileFromSource {
     public List<Employee> readFile() throws IOException {
         List<Employee> allEmps = new ArrayList<>();
         ReadFileFromSource obj = new ReadFileFromSource();
-        StringBuilder out = new StringBuilder();
         InputStream inputStream = obj.getClass().getClassLoader().getResourceAsStream("test2021.txt");
 
         boolean check = false;
@@ -37,7 +36,6 @@ public class ReadFileFromSource {
             String[] ar;
             while ((line = reader.readLine()) != null) {
                 ar = line.split(",");
-                //out.append(line);
                 Employee emp = new Employee();
                 emp.setID1(Integer.parseInt(ar[0].trim()));
                 emp.setProjectID(Integer.parseInt(ar[1].trim()));
@@ -62,7 +60,6 @@ public class ReadFileFromSource {
         }
         return allEmps;
     }
-
 
     public List<WorkTogether> calculatePair(List<Employee> allEmployees) {
         //Grouping the employees according project id, where they have been working for some days
@@ -108,7 +105,6 @@ public class ReadFileFromSource {
                 }
             }
         }
-        //System.out.println(allWorkTogether);
         List<WorkTogether> pairsWorkedTogether = new ArrayList<>();
 
         for (int i = 0; i < allWorkTogether.size(); i++) {

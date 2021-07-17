@@ -25,6 +25,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +50,18 @@ public class MainController {
         return "uploadPage";
     }
 
+    @RequestMapping(value ="/uploadFile", method = RequestMethod.POST)
+    public String insertFileIntoResources(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        /* Receive file uploaded to the Servlet from the uploadPage form */
+        Part filePart = request.getPart("file");
+        String fileName = filePart.getSubmittedFileName();
+        for (Part part : request.getParts()) {
+            part.write("C:\\Users\\" + fileName);
+        }
+        response.getWriter().print("The file uploaded sucessfully.");
+        return "uploadPage";
+    }
+
     @GetMapping("/results")
     public ModelAndView showResults(Model model) throws IOException {
         ModelAndView modelAndView = new ModelAndView("result");
@@ -65,19 +80,6 @@ public class MainController {
         model.addAttribute("pairs", pairRepository.findAll());
         return modelAndView;
     }
-
-
-//    @RequestMapping(value ="/uploadFile", method = RequestMethod.POST)
-//    public String insertFileIntoResources(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-//        /* Receive file uploaded to the Servlet from the uploadPage form */
-//        Part filePart = request.getPart("file");
-//        String fileName = filePart.getSubmittedFileName();
-//        for (Part part : request.getParts()) {
-//            part.write("C:\\Users\\art\\Downloads\\tests\\" + fileName);
-//        }
-//        response.getWriter().print("The file uploaded sucessfully.");
-//        return "result";
-//    }
 
 //    @GetMapping("/uploadedFiles")
 //    public String listUploadedFiles(Model model) throws IOException {
