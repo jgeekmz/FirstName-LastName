@@ -22,9 +22,7 @@ public class Employee {
         return projectID;
     }
 
-    public void setProjectID(int projectID) {
-        this.projectID = projectID;
-    }
+    public void setProjectID(int projectID) { this.projectID = projectID; }
 
     public Date getStartDate() {
         return startDate;

@@ -73,7 +73,7 @@ public class MainController {
                 model.addAttribute("fileNames", fileDBService.getAll());
                 return mav2;
             } else {
-                model.addAttribute("message", "We have alraedy uploaded this file in DB!");
+                model.addAttribute("message", "We have already uploaded this file in DB!");
             }
 //            message = "Uploaded the file successfully to database: " + file.getOriginalFilename();
 //            return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));

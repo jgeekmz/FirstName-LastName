@@ -211,88 +211,57 @@ public class ReadFileFromSource {
         String tempDate = dateToGuess; //.replace("/", "").replace("-", "").replace(" ", "");
         String dateFormat = "";
 
-        // "MM-dd-yyyy", "MM/dd/yyyy", "MM.dd.yyyy",
-        if (tempDate.matches("^[0-3]?[0-9]/[0-3]?[0-9]/(?:[0-9]{2})?[0-9]{2}$")) {
-            dateFormat = "MM/dd/yyyy";
-        }
-        if (tempDate.matches("^[0-3]?[0-9]-[0-3]?[0-9]-(?:[0-9]{2})?[0-9]{2}$")) {
-            dateFormat = "MM-dd-yyyy";
-        }
-        if (tempDate.matches("^[0-3]?[0-9].[0-3]?[0-9].(?:[0-9]{2})?[0-9]{2}$")) {
-            dateFormat = "MM.dd.yyyy";
-            // "dd/MM/yyyy" "dd-MM-yyyy" "dd.MM.yyyy"
-        } else if (tempDate.matches("([0-31]{2})/([0-12]{2})/([0-9]{4})")) {
-            dateFormat = "dd/MM/yyyy";
-        } else if (tempDate.matches("([0-31]{2})-([0-12]{2})-([0-9]{4})")) {
-            dateFormat = "dd-MM-yyyy";
-        } else if (tempDate.matches("([0-31]{2}).([0-12]{2}).([0-9]{4})")) {
-            dateFormat = "dd.MM.yyyy";
-            //else if (tempDate.matches("([0-9]{4})([0-12]{2})([0-31]{2})")) {
-            //dateFormat = "yyyyMMdd";
-            // "yyyy/MM/dd" "yyyy-MM-dd" "yyyy.МM.dd"
-        } else if (tempDate.matches("^\\d{4}/\\d{1,2}/\\d{1,2}$")) {
-            dateFormat = "yyyy/MM/dd";
-        } else if (tempDate.matches("^\\d{4}-\\d{1,2}-\\d{1,2}$")) {
-            dateFormat = "yyyy-MM-dd";
-        } else if (tempDate.matches("^\\d{4}.\\d{1,2}.\\d{1,2}$")) {
-            dateFormat = "yyyy/MM/dd";
-        } else if (tempDate.matches("([0-9]{4})([0-31]{2})([0-12]{2})")) {
-            dateFormat = "yyyyddMM";
-        } else if (tempDate.matches("([0-31]{2})([a-z]{3})([0-9]{4})")) {
-            dateFormat = "ddMMMyyyy";
-            // "MMM-dd-yyyy", "MMM/dd/yyyy", "MMM.dd.yyyy",
-        } else if (tempDate.matches("([a-z]{3})/([0-31]{2})/([0-9]{4})")) {
-            dateFormat = "MMM/dd/yyyy";
-        } else if (tempDate.matches("([a-z]{3})-([0-31]{2})-([0-9]{4})")) {
-            dateFormat = "MMM-dd-yyyy";
-        } else if (tempDate.matches("([a-z]{3}).([0-31]{2}).([0-9]{4})")) {
-            dateFormat = "MMM.dd.yyyy";
-        } else if (tempDate.matches("([0-9]{4})([a-z]{3})([0-31]{2})")) {
-            dateFormat = "yyyyMMMdd";
-        } else if (tempDate.matches("([0-9]{4})/([a-z]{3})/([0-31]{2})")) {
-            dateFormat = "yyyy/MMM/dd";
-        } else if (tempDate.matches("([0-9]{4})-([a-z]{3})-([0-31]{2})")) {
-            dateFormat = "yyyy-MMM-dd";
-        } else if (tempDate.matches("([0-9]{4}).([a-z]{3}).([0-31]{2})")) {
-            dateFormat = "yyyy.MMM.dd";
-        } else if (tempDate.matches("([0-9]{4})([0-31]{2})([a-z]{3})")) {
-            dateFormat = "yyyyddMMM";
-        } else if (tempDate.matches("([a-z]{4})([0-31]{2})([0-9]{4})")) {
-            dateFormat = "MMMMddyyyy";
+        if (dateToGuess.contains("/")) {
+            if (tempDate.matches("^[0-3]?[0-9]/[0-3]?[0-9]/(?:[0-9]{2})?[0-9]{2}$")) {
+                dateFormat = "MM/dd/yyyy";
+            } else if (tempDate.matches("([0-31]{2})/([0-12]{2})/([0-9]{4})")) {
+                dateFormat = "dd/MM/yyyy";
+            } else if (tempDate.matches("^\\d{4}/\\d{1,2}/\\d{1,2}$")) {
+                dateFormat = "yyyy/MM/dd";
+            } else if (tempDate.matches("^\\d{4}.\\d{1,2}.\\d{1,2}$")) {
+                dateFormat = "yyyy/MM/dd";
+            } else if (tempDate.matches("([a-z]{3})/([0-31]{2})/([0-9]{4})")) {
+                dateFormat = "MMM/dd/yyyy";
+            } else if (tempDate.matches("([0-9]{4})/([a-z]{3})/([0-31]{2})")) {
+                dateFormat = "yyyy/MMM/dd";
+            }
+        } else if (dateToGuess.contains("-")) {
+            if (tempDate.matches("^[0-3]?[0-9]-[0-3]?[0-9]-(?:[0-9]{2})?[0-9]{2}$")) {
+                dateFormat = "MM-dd-yyyy";
+            } else if (tempDate.matches("([0-31]{2})-([0-12]{2})-([0-9]{4})")) {
+                dateFormat = "dd-MM-yyyy";
+            } else if (tempDate.matches("^\\d{4}-\\d{1,2}-\\d{1,2}$")) {
+                dateFormat = "yyyy-MM-dd";
+            } else if (tempDate.matches("([a-z]{3})-([0-31]{2})-([0-9]{4})")) {
+                dateFormat = "MMM-dd-yyyy";
+            } else if (tempDate.matches("([0-9]{4})-([a-z]{3})-([0-31]{2})")) {
+                dateFormat = "yyyy-MMM-dd";
+            }
+        } else if (dateToGuess.contains(".")) {
+            if (tempDate.matches("^[0-3]?[0-9].[0-3]?[0-9].(?:[0-9]{2})?[0-9]{2}$")) {
+                dateFormat = "MM.dd.yyyy";
+            } else if (tempDate.matches("([0-31]{2}).([0-12]{2}).([0-9]{4})")) {
+                dateFormat = "dd.MM.yyyy";
+            } else if (tempDate.matches("([a-z]{3}).([0-31]{2}).([0-9]{4})")) {
+                dateFormat = "MMM.dd.yyyy";
+            } else if (tempDate.matches("([0-9]{4}).([a-z]{3}).([0-31]{2})")) {
+                dateFormat = "yyyy.MMM.dd";
+            }
         } else {
-            System.out.println("The was not able to be formatted as expected!!!");
+            if (tempDate.matches("([0-9]{4})([0-31]{2})([0-12]{2})")) {
+                dateFormat = "yyyyddMM";
+            } else if (tempDate.matches("([0-31]{2})([a-z]{3})([0-9]{4})")) {
+                dateFormat = "ddMMMyyyy";
+            } else if (tempDate.matches("([0-9]{4})([a-z]{3})([0-31]{2})")) {
+                dateFormat = "yyyyMMMdd";
+            } else if (tempDate.matches("([0-9]{4})([0-31]{2})([a-z]{3})")) {
+                dateFormat = "yyyyddMMM";
+            } else if (tempDate.matches("([a-z]{4})([0-31]{2})([0-9]{4})")) {
+                dateFormat = "MMMMddyyyy";
+            } else {
+                System.out.println("The was not able to be formatted as expected!!!");
+            }
         }
-
-//        if (tempDate.matches("^[0-3]?[0-9]/[0-3]?[0-9]/(?:[0-9]{2})?[0-9]{2}$")) {
-//            dateFormat = "MM/dd/yyyy";
-//        } else if(tempDate.matches("^[0-3]?[0-9]-[0-3]?[0-9]-(?:[0-9]{2})?[0-9]{2}$")) {
-//            dateFormat = "MM-dd-yyyy";
-//        } else if (tempDate.matches("^\\d{4}/\\d{1,2}/\\d{1,2}$")){
-//            //yyyy/MM/dd Pattern
-//            dateFormat = "yyyy/MM/dd";
-//        } else if (tempDate.matches("([0-31]{2})/([0-12]{2})/([0-9]{4})")) {
-//            dateFormat = "dd/MM/yyyy";
-//        } else if (tempDate.matches("([0-31]{2})-([0-12]{2})-([0-9]{4})")) {
-//            dateFormat = "dd-MM-yyyy";
-//        } else if (tempDate.matches("([0-31]{2}).([0-12]{2}).([0-9]{4})")) {
-//            dateFormat = "dd.MM.yyyy";
-//        } else if (tempDate.matches("([0-9]{4})([0-12]{2})([0-31]{2})")) {
-//            dateFormat = "yyyyMMdd";
-//        } else if (tempDate.matches("([0-9]{4})([0-31]{2})([0-12]{2})")) {
-//            dateFormat = "yyyyddMM";
-//        } else if (tempDate.matches("([0-31]{2})([a-z]{3})([0-9]{4})")) {
-//            dateFormat = "ddMMMyyyy";
-//        } else if (tempDate.matches("([a-z]{3})([0-31]{2})([0-9]{4})")) {
-//            dateFormat = "MMMddyyyy";
-//        } else if (tempDate.matches("([0-9]{4})([a-z]{3})([0-31]{2})")) {
-//            dateFormat = "yyyyMMMdd";
-//        } else if (tempDate.matches("([0-9]{4})([0-31]{2})([a-z]{3})")) {
-//            dateFormat = "yyyyddMMM";
-//        } else if (tempDate.matches("([a-z]{4})([0-31]{2})([0-9]{4})")) {
-//            dateFormat = "MMMMddyyyy";
-//        } else {
-//            System.out.println("The was not able to be formatted as expected!!!");
-//        }
         return dateFormat;
     }
 
