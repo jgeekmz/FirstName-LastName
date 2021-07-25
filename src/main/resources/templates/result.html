@@ -2,8 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<p>File was uploaded!</p>
-
 <div class="col-lg-12">
     <section class="panel">
         <header class="panel-heading">Employee Worked Together on same projects</header>
@@ -15,18 +13,22 @@
                 <th><i class="icon_table"></i> Employee ID#1</th>
                 <th><i class="icon_table"></i> Project ID</th>
                 <th><i class="icon_table"></i> Days Worked Together</th>
+                <th><i class="icon_table"> File </i></th>
             </tr>
             <tr th:each="pair:${pairs}">
                 <td th:text="${pair.emp1}">Employee ID#1</td>
                 <td th:text="${pair.emp2}">Employee ID#1</td>
                 <td th:text="${pair.projectID}">Project ID</td>
                 <td th:text="${pair.totalDaysWorkedTogether}">Days Worked</td>
-                <td></td>
+                <td th:text="${pair.fileDBName}">File</td>
             </tr>
             </tbody>
         </table>
     </section>
 </div>
+<br>
+<br>
+<a th:href="@{/uploadPages}">GO to Upload Page</a>
 
 </body>
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html >
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <body>
 
 <p>Click on the "Choose File" button to upload a file:</p>
@@ -7,21 +8,13 @@
 <div>
     <form th:action="@{/uploadFile}" , method="post" enctype="multipart/form-data">
         <p th:auth="${message}"></p>
-        <input type="file" id="file" name="file">
-        <input type="submit">
+        <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>
+        <input type="file" id="file" name="file" value="Choose File">
+        <input type="submit" name="upload" value="Upload">
     </form>
 </div>
 
-<div>
-    <ul>
-        <li th:each="file : ${files}">
-            <a th:href="${file}" th:text="${file}"/>
-        </li>
-    </ul>
-</div>
-
-<a th:href="@{/results}">Resutls<a/>
-
+<a th:href="@{/uploadFile}">GO to Calculation Page</a>
 
 </body>
 </html>

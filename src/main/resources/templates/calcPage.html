@@ -1,0 +1,42 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div>
+    <p>Available Files:</p>
+    <table class="table table-striped table-advance table-hover">
+        <tbody>
+        <tr>
+            <th><i class="icon_table"></i>Files</th>
+        </tr>
+        <tr th:each="file:${fileNames}">
+            <td th:text="${file.name}">Files</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+<br>
+
+<div>
+    <form th:action="@{/calcFile}" method="post" th:object="${file}">
+        <div class="form-group" th:object="${file}">
+                <select class="form-control selectpicker" th:name="fileChoosen" id="fileChoosen">
+                <option value="">Nothing selected</option>
+                <option th:each="file : ${fileNames}"
+                        th:value="${file.id}"
+                        th:text="${file.name}">File
+                </option>
+            </select>
+        </div>
+        <br>
+        <button class="btn btn-primary" name="calc" type="submit">Show Results</button>
+    </form>
+</div>
+<br>
+<br>
+
+<a th:href="@{/uploadPage}">GO to Upload Page</a>
+
+</body>
+</html>

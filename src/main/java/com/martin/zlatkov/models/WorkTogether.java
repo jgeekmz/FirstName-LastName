@@ -1,5 +1,7 @@
 package com.martin.zlatkov.models;
 
+import javax.persistence.ManyToOne;
+
 public class WorkTogether {
     public int ID1;
     public int ID2;
@@ -11,6 +13,7 @@ public class WorkTogether {
         this.ID2 = ID2;
         this.projectID = projectID;
         this.daysTotalTogether = daysTotalTogether;
+
     }
 
     public int getID1() {

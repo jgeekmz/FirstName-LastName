@@ -12,8 +12,13 @@ public class Pair {
     private int projectID;
     private int totalDaysWorkedTogether;
 
+    private String fileDBName;
+
     public Pair() {
     }
+
+    public String getFileDBName() { return fileDBName; }
+    public void setFileDBName(String fileDBName) { this.fileDBName = fileDBName; }
 
     public int getEmp1() {
         return emp1;
